@@ -2,7 +2,9 @@ package song.api.com.br.song.framework.adapter.controller;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,7 @@ import song.api.com.br.song.framework.adapter.security.AuthenticationService;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
+    @Autowired
     private final AuthenticationService authenticationService;
 
     @PostMapping("/signup")

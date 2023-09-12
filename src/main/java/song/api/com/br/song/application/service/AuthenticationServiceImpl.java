@@ -18,6 +18,7 @@ import song.api.com.br.song.framework.adapter.security.JwtService;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
+
     @Autowired
     private final UserRepository userRepository;
     @Autowired
