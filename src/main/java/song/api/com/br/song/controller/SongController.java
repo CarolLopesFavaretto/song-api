@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import song.api.com.br.song.dao.request.SongsRequest;
 import song.api.com.br.song.dao.response.SongsResponse;
+import song.api.com.br.song.domain.entity.FavoriteSongs;
 import song.api.com.br.song.service.FavoriteSongsService;
 
 @RestController
@@ -21,6 +22,6 @@ public class SongController {
 
     @PostMapping("/favorite")
     public ResponseEntity<SongsResponse> savedSongs(@RequestBody SongsRequest request) {
-        return ResponseEntity.ok(service.saved(request));
+        return service.saved(request);
     }
 }

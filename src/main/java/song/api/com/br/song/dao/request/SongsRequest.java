@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SongsRequest {
 
-    private String songName;
+    private String songFavorite;
     private String artist;
     private String album;
+    private Long userId;
 
 }

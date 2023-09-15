@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import song.api.com.br.song.dao.request.SignUpRequest;
 import song.api.com.br.song.dao.request.SigninRequest;
 import song.api.com.br.song.dao.response.JwtAuthenticationResponse;
-import song.api.com.br.song.domain.entity.Role;
+import song.api.com.br.song.domain.Enum.Role;
 import song.api.com.br.song.domain.entity.Users;
 import song.api.com.br.song.repository.UserRepository;
 import song.api.com.br.song.service.AuthenticationService;

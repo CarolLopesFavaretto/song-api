@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import song.api.com.br.song.domain.Enum.Role;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,8 +31,6 @@ public class Users implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role roles;
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
