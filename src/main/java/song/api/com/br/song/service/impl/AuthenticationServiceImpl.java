@@ -1,7 +1,7 @@
 package song.api.com.br.song.service.impl;
 
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,22 +10,25 @@ import song.api.com.br.song.dao.request.SignUpRequest;
 import song.api.com.br.song.dao.request.SigninRequest;
 import song.api.com.br.song.dao.response.JwtAuthenticationResponse;
 import song.api.com.br.song.domain.Enum.Role;
-import song.api.com.br.song.domain.entity.Users;
+import song.api.com.br.song.domain.entity.User;
 import song.api.com.br.song.repository.UserRepository;
 import song.api.com.br.song.service.AuthenticationService;
 import song.api.com.br.song.service.JwtService;
 
 @Service
-@RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtService jwtService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Override
     public JwtAuthenticationResponse signup(SignUpRequest request) {
-        var user = Users.builder().firstName(request.getFirstName()).lastName(request.getLastName())
+        var user = User.builder().firstName(request.getFirstName()).lastName(request.getLastName())
                 .email(request.getEmail()).password(passwordEncoder.encode(request.getPassword()))
                 .roles(Role.USER).build();
         userRepository.save(user);

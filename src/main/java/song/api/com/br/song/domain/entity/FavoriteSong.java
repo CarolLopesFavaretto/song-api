@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class FavoriteSongs {
+public class FavoriteSong {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

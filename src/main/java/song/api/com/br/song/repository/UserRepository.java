@@ -2,15 +2,15 @@ package song.api.com.br.song.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import song.api.com.br.song.domain.entity.Users;
+import song.api.com.br.song.domain.entity.User;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, Long> {
-    Optional<Users> findByEmail(String email);
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
 
-    Optional<Users> findById(Long userId);
+    Optional<User> findById(Long userId);
 
 
 }

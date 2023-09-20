@@ -4,18 +4,18 @@ import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import song.api.com.br.song.dao.request.SongsRequest;
 import song.api.com.br.song.dao.response.SongsResponse;
-import song.api.com.br.song.domain.entity.FavoriteSongs;
+import song.api.com.br.song.domain.entity.FavoriteSong;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-09-15T18:09:20-0300",
+    date = "2023-09-20T17:24:37-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 @Component
 public class FavoriteMapperImpl implements FavoriteMapper {
 
     @Override
-    public SongsResponse toResponse(FavoriteSongs songs) {
+    public SongsResponse toResponse(FavoriteSong songs) {
         if ( songs == null ) {
             return null;
         }
@@ -32,18 +32,18 @@ public class FavoriteMapperImpl implements FavoriteMapper {
     }
 
     @Override
-    public FavoriteSongs toModel(SongsRequest request) {
+    public FavoriteSong toModel(SongsRequest request) {
         if ( request == null ) {
             return null;
         }
 
-        FavoriteSongs favoriteSongs = new FavoriteSongs();
+        FavoriteSong favoriteSong = new FavoriteSong();
 
-        favoriteSongs.setSongFavorite( request.getSongFavorite() );
-        favoriteSongs.setArtist( request.getArtist() );
-        favoriteSongs.setAlbum( request.getAlbum() );
-        favoriteSongs.setUserId( request.getUserId() );
+        favoriteSong.setSongFavorite( request.getSongFavorite() );
+        favoriteSong.setArtist( request.getArtist() );
+        favoriteSong.setAlbum( request.getAlbum() );
+        favoriteSong.setUserId( request.getUserId() );
 
-        return favoriteSongs;
+        return favoriteSong;
     }
 }

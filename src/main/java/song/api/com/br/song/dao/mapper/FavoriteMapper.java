@@ -5,17 +5,14 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 import song.api.com.br.song.dao.request.SongsRequest;
 import song.api.com.br.song.dao.response.SongsResponse;
-import song.api.com.br.song.domain.entity.FavoriteSongs;
-import song.api.com.br.song.domain.entity.Users;
-
-import java.util.Optional;
+import song.api.com.br.song.domain.entity.FavoriteSong;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
 public interface FavoriteMapper {
 
     FavoriteMapper INSTANCE = Mappers.getMapper(FavoriteMapper.class);
 
-    SongsResponse toResponse(FavoriteSongs songs);
+    SongsResponse toResponse(FavoriteSong songs);
 
-    FavoriteSongs toModel(SongsRequest request);
+    FavoriteSong toModel(SongsRequest request);
 }
