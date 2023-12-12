@@ -14,6 +14,8 @@ import song.api.com.br.song.repository.FavoriteRepository;
 import song.api.com.br.song.repository.UserRepository;
 import song.api.com.br.song.service.FavoriteSongsService;
 
+import java.util.List;
+
 @Service
 public class FavoriteSongsServiceImpl implements FavoriteSongsService {
 
@@ -29,6 +31,19 @@ public class FavoriteSongsServiceImpl implements FavoriteSongsService {
 
     @Override
     public ResponseEntity<SongsResponse> save(SongsRequest request, String token) {
+        request.setUserId(validateTokenAndGetUserId(token));
+        FavoriteSong song = mapper.toModel(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(repository.save(song)));
+    }
+
+    @Override
+    public List<SongsResponse> findBySong(String songFavorite,String token) {
+        Long userId = validateTokenAndGetUserId(token);
+        List<FavoriteSong> favoriteSongs = repository.findBySongFavorite(songFavorite, userId);
+        return mapper.toModelList(favoriteSongs);
+    }
+
+    private Long validateTokenAndGetUserId(String token) {
         String newToken = token.substring(7, token.length());
         Claims claims2 = null;
         try {
@@ -40,10 +55,7 @@ public class FavoriteSongsServiceImpl implements FavoriteSongsService {
             e.printStackTrace();
         }
 
-        request.setUserId(Long.valueOf(claims2.get("id").toString()));
-
-        FavoriteSong song = mapper.toModel(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(repository.save(song)));
+        return Long.valueOf(claims2.get("id").toString());
     }
 
 

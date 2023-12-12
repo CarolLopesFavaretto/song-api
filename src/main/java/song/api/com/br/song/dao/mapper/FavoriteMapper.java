@@ -7,6 +7,8 @@ import song.api.com.br.song.dao.request.SongsRequest;
 import song.api.com.br.song.dao.response.SongsResponse;
 import song.api.com.br.song.domain.entity.FavoriteSong;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
 public interface FavoriteMapper {
 
@@ -15,4 +17,7 @@ public interface FavoriteMapper {
     SongsResponse toResponse(FavoriteSong songs);
 
     FavoriteSong toModel(SongsRequest request);
+
+    List<SongsResponse> toModelList(List<FavoriteSong> songs);
+
 }

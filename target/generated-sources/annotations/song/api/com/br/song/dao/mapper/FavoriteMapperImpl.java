@@ -1,5 +1,7 @@
 package song.api.com.br.song.dao.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import song.api.com.br.song.dao.request.SongsRequest;
@@ -8,7 +10,7 @@ import song.api.com.br.song.domain.entity.FavoriteSong;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-09-20T17:24:37-0300",
+    date = "2023-12-12T11:15:46-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 @Component
@@ -45,5 +47,19 @@ public class FavoriteMapperImpl implements FavoriteMapper {
         favoriteSong.setUserId( request.getUserId() );
 
         return favoriteSong;
+    }
+
+    @Override
+    public List<SongsResponse> toModelList(List<FavoriteSong> songs) {
+        if ( songs == null ) {
+            return null;
+        }
+
+        List<SongsResponse> list = new ArrayList<SongsResponse>( songs.size() );
+        for ( FavoriteSong favoriteSong : songs ) {
+            list.add( toResponse( favoriteSong ) );
+        }
+
+        return list;
     }
 }
