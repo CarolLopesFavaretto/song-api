@@ -15,6 +15,7 @@ import song.api.com.br.song.repository.UserRepository;
 import song.api.com.br.song.service.FavoriteSongsService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FavoriteSongsServiceImpl implements FavoriteSongsService {
@@ -37,11 +38,38 @@ public class FavoriteSongsServiceImpl implements FavoriteSongsService {
     }
 
     @Override
-    public List<SongsResponse> findBySong(String songFavorite,String token) {
+    public List<SongsResponse> findBySong(String songFavorite, String token) {
         Long userId = validateTokenAndGetUserId(token);
         List<FavoriteSong> favoriteSongs = repository.findBySongFavorite(songFavorite, userId);
         return mapper.toModelList(favoriteSongs);
     }
+
+    @Override
+    public ResponseEntity<SongsResponse> updateSong(Long id, SongsRequest request, String token) {
+        Optional<FavoriteSong> songOptional = repository.findById(id);
+
+        if (songOptional.isPresent()) {
+            FavoriteSong song = songOptional.get();
+            song.setSongFavorite(request.getSongFavorite());
+            song.setArtist(request.getArtist());
+            song.setAlbum(request.getAlbum());
+            request.setUserId(validateTokenAndGetUserId(token));
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(repository.save(song)));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @Override
+    public void deleteSong(Long id, String token) {
+        Long userId = validateTokenAndGetUserId(token);
+        Optional<FavoriteSong> songOptional = repository.findById(id);
+        if (songOptional.isPresent()) {
+            FavoriteSong song = songOptional.get();
+            song.setUserId(userId);
+            repository.deleteById(id);
+        }
+    }
+
 
     private Long validateTokenAndGetUserId(String token) {
         String newToken = token.substring(7, token.length());

@@ -10,4 +10,8 @@ public interface FavoriteSongsService {
     ResponseEntity<SongsResponse> save(SongsRequest request, String token);
 
     List<SongsResponse> findBySong(String songFavorite, String token);
+
+    ResponseEntity<SongsResponse> updateSong(Long id, SongsRequest request, String token);
+
+    void deleteSong(Long id, String token);
 }

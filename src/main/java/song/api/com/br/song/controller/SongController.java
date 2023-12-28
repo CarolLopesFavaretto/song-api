@@ -29,4 +29,17 @@ public class SongController {
                                           @RequestHeader(value = "Authorization") String token) {
         return service.findBySong(songFavorite, token);
     }
+
+    @PutMapping("/favorite/{id}")
+    public ResponseEntity<SongsResponse> updateSong(@PathVariable Long id,
+                                                    @RequestBody SongsRequest request,
+                                                    @RequestHeader(value = "Authorization") String token) {
+        return service.updateSong(id, request, token);
+    }
+
+    @DeleteMapping("/favorite/{id}")
+    public void deleteSong(@PathVariable Long id,
+                           @RequestHeader(value = "Authorization") String token) {
+        service.deleteSong(id, token);
+    }
 }
