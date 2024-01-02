@@ -10,7 +10,7 @@ import song.api.com.br.song.domain.entity.FavoriteSong;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-12T11:15:46-0300",
+    date = "2024-01-02T14:55:40-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 @Component
